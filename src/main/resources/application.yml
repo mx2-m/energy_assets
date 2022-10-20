@@ -1,0 +1,6 @@
+app:
+  datasource:
+    jdbc-url: jdbc:postgresql://localhost:5432/baza
+    username: postgres
+    password: minela
+    pool-size: 30
