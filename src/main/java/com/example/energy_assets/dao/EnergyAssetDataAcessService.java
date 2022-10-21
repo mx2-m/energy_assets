@@ -93,16 +93,16 @@ public class EnergyAssetDataAcessService implements EnergyAssetDAO {
     }
 
     @Override
-    public List<EnergyAssetTimeseries> selectEnergyAssetTimeseriesByTimeperiod(String timeStart, String timeEnd) {
+    public List<EnergyAssetTimeseries> selectEnergyAssetTimeseriesByTimeperiod(Timestamp timeStart, Timestamp timeEnd) {
 
         System.out.println(timeStart);
         System.out.println(timeEnd);
 
-
         String sql = "SELECT id,timestamp,activepower, voltage FROM energy" +
                 " WHERE timestamp BETWEEN '" + timeStart + "'AND '" + timeEnd + "' ";
+        //String sql = String.format("SELECT id, timestamp, activepowser, voltage FROM energy WHERE timestamp BETWEEN %s AND %s", timeStart, timeEnd.toString());
         //String sql = "SELECT id,timestamp,activepower, voltage " +
-        //     "FROM energy WHERE timestamp BETWEEN '2022-10-19 15:53:25.862' AND '2022-10-19 21:48:31.558'";
+        //     "FROM energy WHERE timestamp BETWEEN '2022-10-21 00:00:00.00' AND '2022-10-22 00:00:00.00'";
 
 
         List<EnergyAssetTimeseries> list = jdbcTemplate.query(sql,

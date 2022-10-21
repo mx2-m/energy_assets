@@ -14,6 +14,7 @@ import java.sql.Time;
 
 
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
@@ -65,15 +66,28 @@ public class EnergyAssetController {
     public List<EnergyAssetTimeseries> selectByTimeperiod(@PathVariable("timeStart") String lt1,
                                                           @PathVariable("timeEnd") String lt2) {
 
-      /*  LocalDateTime localDateTime1 = LocalDateTime.parse(lt1);
+        Timestamp t1 = ValidateParameter(lt1);
+        Timestamp t2 = ValidateParameter(lt2);
 
 
-        Timestamp t1 = Timestamp.valueOf(localDateTime1);
+        return energyAssetService.getEnergyAssetTimeseriesByTimeperiod(t1, t2);
+    }
 
-        LocalDateTime localDateTime2 = LocalDateTime.parse(lt2);
-        Timestamp t2 = Timestamp.valueOf(localDateTime2);*/
-
-        return energyAssetService.getEnergyAssetTimeseriesByTimeperiod(lt1, lt2);
+    private Timestamp ValidateParameter(@PathVariable("timeStart") String lt) {
+        if (lt.contains("T")) {
+            LocalDateTime localDateTime = LocalDateTime.parse(lt);
+            return Timestamp.valueOf(localDateTime);
+        } else {
+            try {
+                LocalDate localDate = LocalDate.parse(lt);
+                System.out.println(localDate);
+                LocalDateTime localDateTime = localDate.atStartOfDay();
+                return Timestamp.valueOf(localDateTime);
+            } catch (Exception e) {
+                System.out.println("Wrong parameters");
+            }
+        }
+        return null;
     }
 
     @DeleteMapping(path = "{id}")

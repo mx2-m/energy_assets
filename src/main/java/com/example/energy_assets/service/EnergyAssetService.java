@@ -41,7 +41,7 @@ public class EnergyAssetService {
         return energyAssetDAO.selectLatestEnergyAsset();
     }
 
-    public List<EnergyAssetTimeseries> getEnergyAssetTimeseriesByTimeperiod(String t1, String t2) {
+    public List<EnergyAssetTimeseries> getEnergyAssetTimeseriesByTimeperiod(Timestamp t1, Timestamp t2) {
 
         return energyAssetDAO.selectEnergyAssetTimeseriesByTimeperiod(t1, t2);
     }

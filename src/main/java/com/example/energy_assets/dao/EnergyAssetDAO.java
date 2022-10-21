@@ -34,7 +34,7 @@ public interface EnergyAssetDAO {
 
     Optional<EnergyAssetTimeseries> selectEnergyAssetTimeseriesById(UUID id);
 
-    List<EnergyAssetTimeseries> selectEnergyAssetTimeseriesByTimeperiod(String timeStart, String timeEnd);
+    List<EnergyAssetTimeseries> selectEnergyAssetTimeseriesByTimeperiod(Timestamp timeStart, Timestamp timeEnd);
 
     Optional<EnergyAssetTimeseries> selectLatestEnergyAsset();
 
